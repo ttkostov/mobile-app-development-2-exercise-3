@@ -1,9 +1,8 @@
 import {StyleSheet, Text, View} from "react-native";
-import {MOCK_WEATHER} from "../utils/mockWeather";
 import {getWeatherEmoji} from "../utils/weatherCodeMap";
 import {Card, useTheme} from "react-native-paper";
 
-export default function WeatherDetails() {
+export default function WeatherDetails({forecastData}) {
     const theme = useTheme();
 
     const styles = StyleSheet.create({
@@ -16,6 +15,11 @@ export default function WeatherDetails() {
         },
         cityText: {
             fontSize: 25,
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
+        noCityFoundText: {
+            fontSize: 20,
             fontWeight: 'bold',
             textAlign: 'center',
         },
@@ -40,20 +44,20 @@ export default function WeatherDetails() {
         }
     });
 
-
     return (
-        <Card style={styles.weatherContainer}>
-            <Card.Title title={MOCK_WEATHER.city} titleStyle={styles.cityText}/>
-            <Card.Content>
-                <Text style={styles.icon}>{getWeatherEmoji(MOCK_WEATHER.code)}</Text>
-                <View style={styles.detailsContainer}>
-                    <Text style={styles.temperatureText}>{MOCK_WEATHER.temperatureC} °C</Text>
-                    <Text style={styles.detailsText}>{MOCK_WEATHER.windKmh} km/h</Text>
+        !forecastData
+            ? <Text style={styles.noCityFoundText}>No forecast data for this city found!</Text>
+            : <Card style={styles.weatherContainer}>
+                <Card.Title title={forecastData.city} titleStyle={styles.cityText}/>
+                <Card.Content>
+                    <Text style={styles.icon}>{getWeatherEmoji(forecastData.code)}</Text>
+                    <View style={styles.detailsContainer}>
+                        <Text style={styles.temperatureText}>{forecastData.temperatureC} °C</Text>
+                        <Text style={styles.detailsText}>{forecastData.windKmh} km/h</Text>
+                    </View>
+                </Card.Content>
 
-                </View>
-            </Card.Content>
-
-        </Card>
+            </Card>
     )
 }
 
