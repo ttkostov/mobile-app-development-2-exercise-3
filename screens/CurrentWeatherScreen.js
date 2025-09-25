@@ -65,6 +65,8 @@ export default function CurrentWeatherScreen({navigation, toggleTheme}) {
         }, 1000);
     }
     const updateWeather = () => {
+        if (city === '')
+            return;
         const cityIndex = MOCK_WEATHER_WITH_FORECAST.findIndex(entry => entry.city.toLowerCase() === city.toLowerCase());
         console.log(cityIndex);
         if (cityIndex >= 0) {
@@ -105,7 +107,7 @@ export default function CurrentWeatherScreen({navigation, toggleTheme}) {
             </SafeAreaView>
         </ScrollView>
 
-)
+    )
 
 }
 
