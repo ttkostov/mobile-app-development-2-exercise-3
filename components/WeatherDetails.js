@@ -44,10 +44,10 @@ export default function WeatherDetails({forecastData}) {
         <Card style={styles.weatherContainer}>
             <Card.Title title={forecastData.city} titleStyle={styles.cityText}/>
             <Card.Content>
-                <Text style={styles.icon}>{getWeatherEmoji(forecastData.code)}</Text>
+                <Text style={styles.icon}>{getWeatherEmoji(forecastData.current.code)}</Text>
                 <View style={styles.detailsContainer}>
-                    <Text style={styles.temperatureText}>{forecastData.temperatureC} °C</Text>
-                    <Text style={styles.detailsText}>{forecastData.windKmh} km/h</Text>
+                    <Text style={styles.temperatureText}>{forecastData.current.temperatureC} °C</Text>
+                    <Text style={styles.detailsText}>{forecastData.current.windKmh} km/h</Text>
                 </View>
             </Card.Content>
 
