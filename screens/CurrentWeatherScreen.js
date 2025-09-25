@@ -8,10 +8,10 @@ import CustomSnackbar from "../components/CustomSnackbar";
 import CityInputPanel from "../components/CityInputPanel";
 import {useTheme} from "react-native-paper";
 import WeatherPanel from "../components/WeatherPanel";
-import {MOCK_WEATHER} from "../utils/mockWeather";
+import {MOCK_WEATHER_WITH_FORECAST} from "../utils/mockWeather";
 import {SafeAreaView} from "react-native-safe-area-context";
 
-export default function CurrentWeatherScreen({toggleTheme}) {
+export default function CurrentWeatherScreen({navigation, toggleTheme}) {
 
     const theme = useTheme();
 
@@ -50,8 +50,7 @@ export default function CurrentWeatherScreen({toggleTheme}) {
     const [snackBarVisible, setSnackBarVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [city, setCity] = useState('');
-    const [weatherData, setWeatherData] = useState(MOCK_WEATHER[0]);
-
+    const [weatherData, setWeatherData] = useState(MOCK_WEATHER_WITH_FORECAST[0]);
     const showDialog = () => setAboutDialogVisible(true);
     const hideDialog = () => setAboutDialogVisible(false);
 
@@ -66,21 +65,23 @@ export default function CurrentWeatherScreen({toggleTheme}) {
         }, 1000);
     }
     const updateWeather = () => {
-        const cityIndex = MOCK_WEATHER.findIndex(entry => entry.city.toLowerCase() === city.toLowerCase());
+        const cityIndex = MOCK_WEATHER_WITH_FORECAST.findIndex(entry => entry.city.toLowerCase() === city.toLowerCase());
+        console.log(cityIndex);
         if (cityIndex >= 0) {
-            setWeatherData(MOCK_WEATHER[cityIndex]);
+            setWeatherData(MOCK_WEATHER_WITH_FORECAST[cityIndex]);
         } else setWeatherData(undefined);
     }
 
     const clearCityInput = () => {
         setCity('');
     };
+
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContentContainer}
                     style={styles.scrollViewContainer}>
             <SafeAreaView style={styles.container}>
                 <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-                    <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
+                    <Header title='Current Weather' toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
                     <View style={styles.weatherContainer}>
                         <CityInputPanel cityValue={city}
                                         onRefresh={updateWeather}
@@ -91,7 +92,7 @@ export default function CurrentWeatherScreen({toggleTheme}) {
                             {
                                 loading
                                     ? <ActivityIndicator size="large" color={theme.colors.primary}/>
-                                    : <WeatherPanel forecastData={weatherData}/>
+                                    : <WeatherPanel navigation={navigation} forecastData={weatherData}/>
                             }
 
                         </View>
