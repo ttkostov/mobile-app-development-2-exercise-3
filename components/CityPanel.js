@@ -1,6 +1,5 @@
 import {View, StyleSheet} from 'react-native';
 import PrimaryButton from "./PrimaryButton";
-import {useState} from "react";
 import CityInput from "./CityInput";
 import {useTheme} from "react-native-paper";
 
