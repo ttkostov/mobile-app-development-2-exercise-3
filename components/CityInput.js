@@ -1,0 +1,41 @@
+import {View, StyleSheet} from 'react-native';
+import PrimaryButton from "./PrimaryButton";
+import {TextInput, useTheme} from 'react-native-paper'
+
+export default function CityInput({value, onChangeText, onClear, onSubmit}) {
+    const theme = useTheme()
+    const styles = StyleSheet.create({
+        container: {
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 20
+        },
+        textInput: {
+            maxWidth: 200,
+            flex: 1,
+            backgroundColor: theme.colors.surface
+        },
+    })
+
+    return (
+        <View style={styles.container}>
+            <TextInput
+                mode="flat"
+                style={styles.textInput}
+                label='City'
+                placeholder='Helsinki'
+                onChangeText={onChangeText}
+                onSubmitEditing={onSubmit}
+                value={value}
+            />
+            <PrimaryButton
+                text='Clear'
+                onPress={onClear}
+            />
+        </View>
+
+    )
+}
+
