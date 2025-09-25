@@ -6,8 +6,9 @@ import AboutDialog from "../components/AboutDialog";
 import {useState} from "react";
 import CustomSnackbar from "../components/CustomSnackbar";
 import CityPanel from "../components/CityPanel";
-import WeatherDetails from "../components/WeatherDetails";
 import {useTheme} from "react-native-paper";
+import WeatherPanel from "../components/WeatherPanel";
+import {MOCK_WEATHER} from "../utils/mockWeather";
 
 export default function WeatherScreen({toggleTheme}) {
     const theme = useTheme();
@@ -16,6 +17,7 @@ export default function WeatherScreen({toggleTheme}) {
     const [snackBarVisible, setSnackBarVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [city, setCity] = useState('');
+    const [weatherData, setWeatherData] = useState(MOCK_WEATHER[0]);
 
     const showDialog = () => setAboutDialogVisible(true);
     const hideDialog = () => setAboutDialogVisible(false);
@@ -30,6 +32,14 @@ export default function WeatherScreen({toggleTheme}) {
             setLoading(false);
         }, 1000);
     }
+    const updateWeather = () => {
+        const cityIndex = MOCK_WEATHER.findIndex(entry => entry.city.toLowerCase() === city.toLowerCase());
+        if (cityIndex >= 0) {
+            setWeatherData( MOCK_WEATHER[cityIndex]);
+        }
+        else setWeatherData( undefined);
+    }
+
     const clearCityInput = () => {
         setCity('');
     };
@@ -38,7 +48,7 @@ export default function WeatherScreen({toggleTheme}) {
             <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
             <View style={styles.weatherContainer}>
                 <CityPanel cityValue={city}
-                           onRefresh={handleLoading}
+                           onRefresh={updateWeather}
                            onClearCityInput={clearCityInput}
                            onChangeCity={setCity}
                            onToggleSnackbar={hideDialog}/>
@@ -46,7 +56,7 @@ export default function WeatherScreen({toggleTheme}) {
                     {
                         loading
                             ? <ActivityIndicator size="large" color={theme.colors.primary}/>
-                            : <WeatherDetails/>
+                            : <WeatherPanel forecastData={weatherData}/>
                     }
 
                 </View>
