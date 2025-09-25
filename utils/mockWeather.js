@@ -17,11 +17,11 @@ export class WeatherEntry {
 }
 
 export const MOCK_WEATHER = [
-    new WeatherEntry(1, 'Helsinki, FI', 12.3, 18, 1),
-    new WeatherEntry(2, 'Espoo, FI', 12.0, 16, 1),
-    new WeatherEntry(3, 'Tampere, FI', 11.0, 14, 3),
-    new WeatherEntry(4, 'Vantaa, FI', 12.1, 17, 2),
-    new WeatherEntry(5, 'Oulu, FI', 9.5, 20, 3),
-    new WeatherEntry(6, 'Turku, FI', 12.5, 15, 2),
-    new WeatherEntry(7, 'Jyväskylä, FI', 10.0, 13, 1),
+    new WeatherEntry(1, 'Helsinki', 12.3, 18, 1),
+    new WeatherEntry(2, 'Espoo', 12.0, 16, 1),
+    new WeatherEntry(3, 'Tampere', 11.0, 14, 3),
+    new WeatherEntry(4, 'Vantaa', 12.1, 17, 2),
+    new WeatherEntry(5, 'Oulu', 9.5, 20, 3),
+    new WeatherEntry(6, 'Turku', 12.5, 15, 2),
+    new WeatherEntry(7, 'Jyväskylä', 10.0, 13, 1),
 ];
