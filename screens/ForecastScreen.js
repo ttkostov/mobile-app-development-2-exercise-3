@@ -1,14 +1,7 @@
 import {View, StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView} from 'react-native';
 import Header from '../components/Header.js';
-import CustomFAB from '../components/CustomFAB';
 import {Platform} from "react-native";
-import AboutDialog from "../components/AboutDialog";
-import {useState} from "react";
-import CustomSnackbar from "../components/CustomSnackbar";
-import CityInputPanel from "../components/CityInputPanel";
 import {useTheme} from "react-native-paper";
-import WeatherPanel from "../components/WeatherPanel";
-import {MOCK_WEATHER} from "../utils/mockWeather";
 import {SafeAreaView} from "react-native-safe-area-context";
 import ForecastPanel from "../components/ForecastPanel";
 

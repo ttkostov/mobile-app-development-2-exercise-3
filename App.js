@@ -7,10 +7,10 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import ForecastScreen from "./screens/ForecastScreen";
 import CurrentWeatherScreen from "./screens/CurrentWeatherScreen";
-import {MOCK_WEATHER, MOCK_WEATHER_WITH_FORECAST} from "./utils/mockWeather";
+import { MOCK_WEATHER_WITH_FORECAST} from "./utils/mockWeather";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 export default function App() {
     const [isThemeDark, setIsThemeDark] = useState(false);

@@ -1,7 +1,5 @@
 import {View, StyleSheet, Text} from 'react-native';
-import WeatherDetails from "./WeatherDetails";
 import {useTheme} from "react-native-paper";
-import PrimaryButton from "./PrimaryButton";
 import ForecastDetails from "./ForecastDetails";
 
 export default function ForecastPanel({forecastData}) {
