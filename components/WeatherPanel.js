@@ -3,7 +3,7 @@ import WeatherDetails from "./WeatherDetails";
 import {useTheme} from "react-native-paper";
 import PrimaryButton from "./PrimaryButton";
 
-export default function WeatherPanel({forecastData}) {
+export default function WeatherPanel({navigation, forecastData}) {
     const theme = useTheme();
 
     const styles = StyleSheet.create({
@@ -33,7 +33,9 @@ export default function WeatherPanel({forecastData}) {
                     ? <Text style={styles.noCityFoundText}>No forecast data for this city found!</Text>
                     : <>
                         <WeatherDetails forecastData={forecastData}/>
-                    <PrimaryButton title="Open Forecast" />
+                        <PrimaryButton text='Open Forecast' onPress={() => {
+                            navigation.navigate('Forecast', {weatherForecastData: forecastData});
+                        }}/>
                     </>
 
             }
