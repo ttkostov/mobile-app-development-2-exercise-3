@@ -1,6 +1,6 @@
-import {useTheme} from "react-native-paper";
+import {Tooltip, useTheme} from "react-native-paper";
 import {StyleSheet, Text, View} from 'react-native';
-import {getWeatherEmoji} from "../utils/weatherCodeMap";
+import {getWeatherDescription, getWeatherEmoji} from "../utils/weatherCodeMap";
 
 
 export default function ForecastListItem({forecastDataItem}) {
@@ -38,7 +38,11 @@ export default function ForecastListItem({forecastDataItem}) {
             flexDirection: 'row',
         },
         day: {
+            color: theme.colors.onSurface,
             fontWeight: "bold"
+        },
+        details: {
+            color: theme.colors.onSurface,
         }
     })
 
@@ -46,14 +50,16 @@ export default function ForecastListItem({forecastDataItem}) {
         <View style={styles.container}>
             <Text style={styles.day}>{forecastDataItem.day}</Text>
             <View style={styles.forecastContainer}>
-                <Text style={styles.weatherCondition}>{getWeatherEmoji(forecastDataItem.code)}</Text>
+                <Tooltip title={getWeatherDescription(forecastDataItem.code)}>
+                    <Text style={styles.weatherCondition}>{getWeatherEmoji(forecastDataItem.code)}</Text>
+                </Tooltip>
                 <View style={styles.weatherDetailsContainer}>
                     <View style={styles.temperatureContainer}>
-                        <Text>↓{forecastDataItem.temperatureMinC} °C</Text>
-                        <Text>↑{forecastDataItem.temperatureMaxC} °C</Text>
+                        <Text style={styles.details}>↓{forecastDataItem.temperatureMinC} °C</Text>
+                        <Text style={styles.details}>↑{forecastDataItem.temperatureMaxC} °C</Text>
                     </View>
-                    <Text>💨 {forecastDataItem.windKmh} km/h</Text>
-                    <Text>☂️ {forecastDataItem.precipitationProbability}%</Text>
+                    <Text style={styles.details}>💨 {forecastDataItem.windKmh} km/h</Text>
+                    <Text style={styles.details}>☂️ {forecastDataItem.precipitationProbability}%</Text>
                 </View>
             </View>
         </View>
