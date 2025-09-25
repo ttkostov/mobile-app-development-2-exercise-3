@@ -4,6 +4,12 @@ import {SafeAreaView} from "react-native-safe-area-context";
 import {Provider as PaperProvider} from 'react-native-paper';
 import {LightTheme, DarkTheme} from "./theme/AppTheme";
 import {useState} from "react";
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from "@react-navigation/stack";
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
     const [isThemeDark, setIsThemeDark] = useState(false);
@@ -14,31 +20,21 @@ export default function App() {
 
     const theme = isThemeDark ? DarkTheme : LightTheme;
 
-    const styles = StyleSheet.create({
-        scrollViewContentContainer: {
-            flexGrow: 1,
-        },
-        scrollViewContainer: {
-            flex: 1,
-            backgroundColor: theme.colors.background,
-        },
-        container: {
-            flexDirection: 'column',
-            flex: 1,
-            alignItems: 'stretch',
-            justifyContent: 'flex-start',
-            padding: 20
-        },
-    });
-
     return (
         <PaperProvider theme={theme}>
-            <ScrollView contentContainerStyle={styles.scrollViewContentContainer} style={styles.scrollViewContainer}>
-                <SafeAreaView style={styles.container}>
+
+                    <NavigationContainer>
+                        <Stack.Navigator id='main-navigator'>
+                            <Stack.Screen
+                                name="Home"
+                                children={(props) => (
+                                    <WeatherScreen {...props} toggleTheme={toggleTheme}/>
+                                )}
+                                options={{headerShown: false}}
+                            />
+                        </Stack.Navigator>
+                    </NavigationContainer>
                     <StatusBar barStyle='light-content' backgroundColor={theme.colors.background}/>
-                    <WeatherScreen toggleTheme={toggleTheme}/>
-                </SafeAreaView>
-            </ScrollView>
         </PaperProvider>
     );
 }

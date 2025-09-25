@@ -1,4 +1,4 @@
-import {View, StyleSheet, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, KeyboardAvoidingView, ActivityIndicator, ScrollView} from 'react-native';
 import Header from '../components/Header.js';
 import CustomFAB from '../components/CustomFAB';
 import {Platform} from "react-native";
@@ -9,9 +9,42 @@ import CityPanel from "../components/CityPanel";
 import {useTheme} from "react-native-paper";
 import WeatherPanel from "../components/WeatherPanel";
 import {MOCK_WEATHER} from "../utils/mockWeather";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 export default function WeatherScreen({toggleTheme}) {
+
     const theme = useTheme();
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            justifyContent: 'flex-start',
+            gap: 20
+        },
+        weatherContainer: {
+            gap: 20,
+            flex: 3,
+        },
+        weatherDetailsContainer: {
+            flex: 3
+        },
+        scrollViewContentContainer: {
+            flexGrow: 1,
+        },
+        scrollViewContainer: {
+            flex: 1,
+            backgroundColor: theme.colors.background,
+        },
+        container: {
+            flexDirection: 'column',
+            flex: 1,
+            alignItems: 'stretch',
+            justifyContent: 'flex-start',
+            padding: 20
+        },
+    });
 
     const [aboutDialogVisible, setAboutDialogVisible] = useState(false);
     const [snackBarVisible, setSnackBarVisible] = useState(false);
@@ -35,54 +68,43 @@ export default function WeatherScreen({toggleTheme}) {
     const updateWeather = () => {
         const cityIndex = MOCK_WEATHER.findIndex(entry => entry.city.toLowerCase() === city.toLowerCase());
         if (cityIndex >= 0) {
-            setWeatherData( MOCK_WEATHER[cityIndex]);
-        }
-        else setWeatherData( undefined);
+            setWeatherData(MOCK_WEATHER[cityIndex]);
+        } else setWeatherData(undefined);
     }
 
     const clearCityInput = () => {
         setCity('');
     };
     return (
-        <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-            <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
-            <View style={styles.weatherContainer}>
-                <CityPanel cityValue={city}
-                           onRefresh={updateWeather}
-                           onClearCityInput={clearCityInput}
-                           onChangeCity={setCity}
-                           onToggleSnackbar={hideDialog}/>
-                <View style={styles.weatherDetailsContainer}>
-                    {
-                        loading
-                            ? <ActivityIndicator size="large" color={theme.colors.primary}/>
-                            : <WeatherPanel forecastData={weatherData}/>
-                    }
+        <ScrollView contentContainerStyle={styles.scrollViewContentContainer}
+                    style={styles.scrollViewContainer}>
+            <SafeAreaView style={styles.container}>
+                <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+                    <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
+                    <View style={styles.weatherContainer}>
+                        <CityPanel cityValue={city}
+                                   onRefresh={updateWeather}
+                                   onClearCityInput={clearCityInput}
+                                   onChangeCity={setCity}
+                                   onToggleSnackbar={hideDialog}/>
+                        <View style={styles.weatherDetailsContainer}>
+                            {
+                                loading
+                                    ? <ActivityIndicator size="large" color={theme.colors.primary}/>
+                                    : <WeatherPanel forecastData={weatherData}/>
+                            }
 
-                </View>
+                        </View>
 
-            </View>
-            <AboutDialog onDismiss={hideDialog} visible={aboutDialogVisible}/>
-            <CustomFAB onPress={onToggleSnackbar}/>
-            <CustomSnackbar visible={snackBarVisible} onDismiss={onDismissSnackbar}/>
-        </KeyboardAvoidingView>
-    )
+                    </View>
+                    <AboutDialog onDismiss={hideDialog} visible={aboutDialogVisible}/>
+                    <CustomFAB onPress={onToggleSnackbar}/>
+                    <CustomSnackbar visible={snackBarVisible} onDismiss={onDismissSnackbar}/>
+                </KeyboardAvoidingView>
+            </SafeAreaView>
+        </ScrollView>
+
+)
 
 }
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'stretch',
-        justifyContent: 'flex-start',
-        gap: 20
-    },
-    weatherContainer: {
-        gap: 20,
-        flex: 3,
-    },
-    weatherDetailsContainer: {
-        flex: 3
-    }
-});
