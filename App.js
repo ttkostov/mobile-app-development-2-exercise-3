@@ -1,5 +1,5 @@
 import {StatusBar, StyleSheet, ScrollView} from 'react-native';
-import WeatherScreen from './screens/WeatherScreen';
+import CurrentWeatherScreen from './screens/CurrentWeatherScreen';
 import {SafeAreaView} from "react-native-safe-area-context";
 import {Provider as PaperProvider} from 'react-native-paper';
 import {LightTheme, DarkTheme} from "./theme/AppTheme";
@@ -28,7 +28,7 @@ export default function App() {
                             <Stack.Screen
                                 name="Home"
                                 children={(props) => (
-                                    <WeatherScreen {...props} toggleTheme={toggleTheme}/>
+                                    <CurrentWeatherScreen {...props} toggleTheme={toggleTheme}/>
                                 )}
                                 options={{headerShown: false}}
                             />

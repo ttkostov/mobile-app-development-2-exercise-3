@@ -11,7 +11,7 @@ import WeatherPanel from "../components/WeatherPanel";
 import {MOCK_WEATHER} from "../utils/mockWeather";
 import {SafeAreaView} from "react-native-safe-area-context";
 
-export default function WeatherScreen({toggleTheme}) {
+export default function CurrentWeatherScreen({toggleTheme}) {
 
     const theme = useTheme();
 
