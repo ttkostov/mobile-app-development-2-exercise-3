@@ -5,7 +5,7 @@ import {Platform} from "react-native";
 import AboutDialog from "../components/AboutDialog";
 import {useState} from "react";
 import CustomSnackbar from "../components/CustomSnackbar";
-import CityPanel from "../components/CityPanel";
+import CityInputPanel from "../components/CityInputPanel";
 import {useTheme} from "react-native-paper";
 import WeatherPanel from "../components/WeatherPanel";
 import {MOCK_WEATHER} from "../utils/mockWeather";
@@ -82,11 +82,11 @@ export default function CurrentWeatherScreen({toggleTheme}) {
                 <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
                     <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
                     <View style={styles.weatherContainer}>
-                        <CityPanel cityValue={city}
-                                   onRefresh={updateWeather}
-                                   onClearCityInput={clearCityInput}
-                                   onChangeCity={setCity}
-                                   onToggleSnackbar={hideDialog}/>
+                        <CityInputPanel cityValue={city}
+                                        onRefresh={updateWeather}
+                                        onClearCityInput={clearCityInput}
+                                        onChangeCity={setCity}
+                                        onToggleSnackbar={hideDialog}/>
                         <View style={styles.weatherDetailsContainer}>
                             {
                                 loading
