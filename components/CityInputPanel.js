@@ -3,7 +3,7 @@ import PrimaryButton from "./PrimaryButton";
 import CityInput from "./CityInput";
 import {useTheme} from "react-native-paper";
 
-export default function CityPanel({cityValue, onRefresh, onClearCityInput, onChangeCity}) {
+export default function CityInputPanel({cityValue, onRefresh, onClearCityInput, onChangeCity}) {
     const theme = useTheme();
 
     const styles = StyleSheet.create({
