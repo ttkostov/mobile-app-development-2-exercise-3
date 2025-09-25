@@ -1,6 +1,5 @@
 import {View, StyleSheet, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
 import Header from '../components/Header.js';
-import WeatherPanel from '../components/WeatherPanel'
 import CustomFAB from '../components/CustomFAB';
 import {Platform} from "react-native";
 import AboutDialog from "../components/AboutDialog";
@@ -15,6 +14,8 @@ export default function WeatherScreen({toggleTheme}) {
 
     const [aboutDialogVisible, setAboutDialogVisible] = useState(false);
     const [snackBarVisible, setSnackBarVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [city, setCity] = useState('');
 
     const showDialog = () => setAboutDialogVisible(true);
     const hideDialog = () => setAboutDialogVisible(false);
@@ -22,7 +23,6 @@ export default function WeatherScreen({toggleTheme}) {
     const onToggleSnackbar = () => setSnackBarVisible(true);
     const onDismissSnackbar = () => setSnackBarVisible(false);
 
-    const [loading, setLoading] = useState(false);
     const handleLoading = () => {
         setLoading(true);
 
@@ -30,17 +30,18 @@ export default function WeatherScreen({toggleTheme}) {
             setLoading(false);
         }, 1000);
     }
-
-    const [city, setCity] = useState('');
-    const clearInput = () => {
+    const clearCityInput = () => {
         setCity('');
     };
-
     return (
         <KeyboardAvoidingView style={styles.screen} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
             <Header toggleTheme={toggleTheme} showAboutDialog={showDialog}/>
             <View style={styles.weatherContainer}>
-                <CityPanel onRefresh={handleLoading}/>
+                <CityPanel cityValue={city}
+                           onRefresh={handleLoading}
+                           onClearCityInput={clearCityInput}
+                           onChangeCity={setCity}
+                           onToggleSnackbar={hideDialog}/>
                 <View style={styles.weatherDetailsContainer}>
                     {
                         loading

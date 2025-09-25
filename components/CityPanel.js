@@ -1,15 +1,10 @@
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import PrimaryButton from "./PrimaryButton";
 import {useState} from "react";
 import CityInput from "./CityInput";
 import {useTheme} from "react-native-paper";
 
-export default function CityPanel({onRefresh}) {
-    const [city, setCity] = useState('');
-    const clearInput = () => {
-        setCity('');
-    };
-
+export default function CityPanel({cityValue, onRefresh, onClearCityInput, onChangeCity}) {
     const theme = useTheme();
 
     const styles = StyleSheet.create({
@@ -29,7 +24,7 @@ export default function CityPanel({onRefresh}) {
 
     return (
         <View style={styles.panelContainer}>
-            <CityInput value={city} onChangeText={setCity} onClear={clearInput}/>
+            <CityInput value={cityValue} onChangeText={onChangeCity} onClear={onClearCityInput}/>
             <PrimaryButton
                 text='Update Forecast'
                 icon='refresh'
