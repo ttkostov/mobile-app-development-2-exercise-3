@@ -18,11 +18,7 @@ export default function WeatherDetails({forecastData}) {
             fontWeight: 'bold',
             textAlign: 'center',
         },
-        noCityFoundText: {
-            fontSize: 20,
-            fontWeight: 'bold',
-            textAlign: 'center',
-        },
+
         icon: {
             fontSize: 150,
             textAlign: 'center',
@@ -45,19 +41,17 @@ export default function WeatherDetails({forecastData}) {
     });
 
     return (
-        !forecastData
-            ? <Text style={styles.noCityFoundText}>No forecast data for this city found!</Text>
-            : <Card style={styles.weatherContainer}>
-                <Card.Title title={forecastData.city} titleStyle={styles.cityText}/>
-                <Card.Content>
-                    <Text style={styles.icon}>{getWeatherEmoji(forecastData.code)}</Text>
-                    <View style={styles.detailsContainer}>
-                        <Text style={styles.temperatureText}>{forecastData.temperatureC} °C</Text>
-                        <Text style={styles.detailsText}>{forecastData.windKmh} km/h</Text>
-                    </View>
-                </Card.Content>
+        <Card style={styles.weatherContainer}>
+            <Card.Title title={forecastData.city} titleStyle={styles.cityText}/>
+            <Card.Content>
+                <Text style={styles.icon}>{getWeatherEmoji(forecastData.code)}</Text>
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.temperatureText}>{forecastData.temperatureC} °C</Text>
+                    <Text style={styles.detailsText}>{forecastData.windKmh} km/h</Text>
+                </View>
+            </Card.Content>
 
-            </Card>
+        </Card>
     )
 }
 

@@ -1,6 +1,7 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import WeatherDetails from "./WeatherDetails";
 import {useTheme} from "react-native-paper";
+import PrimaryButton from "./PrimaryButton";
 
 export default function WeatherPanel({forecastData}) {
     const theme = useTheme();
@@ -16,12 +17,26 @@ export default function WeatherPanel({forecastData}) {
             gap: 20,
             padding: 10
         },
+        noCityFoundText: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
 
     });
 
     return (
+
         <View style={styles.panelContainer}>
-            <WeatherDetails forecastData={forecastData}/>
+            {
+                !forecastData
+                    ? <Text style={styles.noCityFoundText}>No forecast data for this city found!</Text>
+                    : <>
+                        <WeatherDetails forecastData={forecastData}/>
+                    <PrimaryButton title="Open Forecast" />
+                    </>
+
+            }
         </View>
     );
 }
