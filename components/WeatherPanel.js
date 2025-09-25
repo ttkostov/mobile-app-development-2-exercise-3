@@ -1,11 +1,8 @@
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import PrimaryButton from "./PrimaryButton";
-import {useState} from "react";
+import {View, StyleSheet} from 'react-native';
 import WeatherDetails from "./WeatherDetails";
-import CityInput from "./CityInput";
 import {useTheme} from "react-native-paper";
 
-export default function WeatherPanel() {
+export default function WeatherPanel({forecastData}) {
     const theme = useTheme();
 
     const styles = StyleSheet.create({
@@ -24,7 +21,7 @@ export default function WeatherPanel() {
 
     return (
         <View style={styles.panelContainer}>
-            <WeatherDetails/>
+            <WeatherDetails forecastData={forecastData}/>
         </View>
     );
 }
