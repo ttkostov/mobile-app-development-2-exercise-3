@@ -8,7 +8,7 @@ export default function CityInputPanel({cityValue, onRefresh, onClearCityInput, 
 
     const styles = StyleSheet.create({
         panelContainer: {
-            flex: 1,
+            alignSelf: 'stretch',
             borderRadius: 20,
             backgroundColor: theme.colors.surface,
             flexDirection: 'column',
