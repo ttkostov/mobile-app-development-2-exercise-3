@@ -31,7 +31,6 @@ export default function CurrentWeatherScreen({navigation, toggleTheme}) {
             flex: 3
         },
         scrollViewContentContainer: {
-            flexGrow: 1,
         },
         scrollViewContainer: {
             flex: 1,
