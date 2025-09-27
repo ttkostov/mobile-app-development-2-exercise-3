@@ -1,14 +1,21 @@
-import {Dialog, Portal} from "react-native-paper";
+import {Dialog, Portal, useTheme} from "react-native-paper";
 import PrimaryButton from "./PrimaryButton";
-import {Text} from "react-native";
+import {StyleSheet, Text} from "react-native";
 
 export default function AboutDialog({visible, onDismiss}) {
+    const theme = useTheme();
+    const styles = StyleSheet.create({
+        text: {
+            color: theme.colors.onSurface
+        }
+    })
+
     return (
         <Portal>
             <Dialog visible={visible} onDismiss={onDismiss}>
                 <Dialog.Title>About the App</Dialog.Title>
                 <Dialog.Content>
-                    <Text>This is a weather app created for the course Mobile App Development 2 at TAMK</Text>
+                    <Text style={styles.text}>This is a weather app created for the course Mobile App Development 2 at TAMK</Text>
                 </Dialog.Content>
                 <Dialog.Actions>
                     <PrimaryButton text='Done' onPress={onDismiss}/>
