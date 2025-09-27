@@ -101,7 +101,7 @@ export default function CurrentWeatherScreen({navigation, toggleTheme}) {
 
                     </View>
                     <AboutDialog onDismiss={hideDialog} visible={aboutDialogVisible}/>
-                    <CustomFAB onPress={onToggleSnackbar}/>
+                    {/*<CustomFAB onPress={onToggleSnackbar}/>*/}
                     <CustomSnackbar visible={snackBarVisible} onDismiss={onDismissSnackbar}/>
                 </KeyboardAvoidingView>
             </SafeAreaView>
