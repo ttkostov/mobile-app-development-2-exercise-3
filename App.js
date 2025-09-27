@@ -32,6 +32,7 @@ export default function App() {
                                    tabBarIconStyle: {marginBottom: 7},
                                    tabBarLabelStyle: {fontSize: 15, color: theme.colors.primary},
                                    tabBarStyle: {backgroundColor: theme.colors.surface},
+                                   tabBarActiveTintColor: theme.colors.background,
                                }}
                 >
                     <Tab.Screen name={"Home"}
